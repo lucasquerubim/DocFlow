@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Docflow</title>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- libs para export -->
+  <script src="https://cdn.jsdelivr.net/npm/pizzip@3.1.6/dist/pizzip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docxtemplater@3.39.1/build/docxtemplater.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.9.3/dist/html2pdf.min.js"></script>
+</head>
+<body>
+  <!-- LOGIN -->
+  <section id="loginView" class="login-wrap">
+    <div class="login-card">
+      <img src="logo.png" alt="Docflow" class="logo-xxl"/>
+      <h1>Bem-vindo ao Docflow</h1>
+      <p class="muted">Entre com um clique.</p>
+      <button id="oneClickLogin" class="btn btn-primary btn-lg">Acessar</button>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="appShell" class="hidden">
+    <aside class="sidebar">
+      <div class="brand-mini"><img src="logo.png" alt="Docflow"/></div>
+
+      <div class="profile-mini card">
+        <img id="avatar" class="avatar" src="LucasAlmeida.png" alt="Avatar"/>
+        <h3 id="sidebarName">Lucas Almeida</h3>
+        <p id="sidebarRole" class="muted small">Designer gráfico autônomo</p>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboardView">🏠 Dashboard</button>
+        <button class="nav-item" data-view="documentsView">📁 Documentos</button>
+        <button class="nav-item" data-view="profileView">👤 Perfil</button>
+        <button class="nav-item" data-view="notificationsView">🔔 Notificações</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-ghost danger">Sair</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="searchbox">
+          <input id="searchInput" type="search" placeholder="Buscar documentos, tipos, pessoas..."/>
+          <button id="searchBtn" class="btn btn-dark">Buscar</button>
+        </div>
+        <div class="user-pill">
+          <img class="avatar xs" id="avatarTop" src="LucasAlmeida.png" alt="Avatar topo"/>
+          <div>
+            <strong id="userName">Lucas Almeida</strong>
+            <div id="userEmail" class="muted small">lucas.almeida@docflow.app</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section id="dashboardView" class="view">
+        <div class="kpi-grid">
+          <article class="kpi-card kpi-pink"><div class="kpi-label">Rascunhos</div><div id="kpiDraft" class="kpi-value">0</div><div class="kpi-diff up">+2 hoje</div></article>
+          <article class="kpi-card kpi-green"><div class="kpi-label">Prontos</div><div id="kpiReady" class="kpi-value">0</div><div class="kpi-diff">—</div></article>
+          <article class="kpi-card kpi-purple"><div class="kpi-label">Pendentes de assinatura</div><div id="kpiSign" class="kpi-value">0</div><div class="kpi-diff warn">atenção</div></article>
+        </div>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>Gerar documentos</h2>
+            <div class="row gap">
+              <button id="quickCreate" class="btn btn-primary">➕ Criar documento</button>
+              <a class="btn btn-gov" target="_blank" rel="noopener" href="https://www.gov.br/pt-br/servicos/assinatura-eletronica">🖋️ Assinar no Gov.br</a>
+            </div>
+          </div>
+          <div class="doc-grid"><!-- via JS --></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>Documentos recentes</h2>
+            <button id="listAll" class="btn btn-ghost">Ver todos</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table" id="docsTable">
+              <thead>
+                <tr><th>Título</th><th>Tipo</th><th>Status</th><th>Atualizado</th><th class="right">Ações</th></tr>
+              </thead>
+              <tbody id="docsTbody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <!-- TODOS OS DOCUMENTOS -->
+      <section id="documentsView" class="view hidden">
+        <div class="card-head">
+          <h2>Todos os documentos</h2>
+          <button id="btnVoltar" class="btn">← Voltar</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table" id="allDocsTable">
+            <thead>
+              <tr><th>Título</th><th>Tipo</th><th>Status</th><th>Atualizado</th><th class="right">Ações</th></tr>
+            </thead>
+            <tbody id="allDocsTbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- NOTIFICAÇÕES -->
+      <section id="notificationsView" class="view hidden">
+        <div class="card">
+          <div class="card-head">
+            <h2>Notificações</h2>
+            <button id="clearNotifs" class="btn btn-ghost small">Limpar</button>
+          </div>
+          <ul id="notifList" class="notif-list"></ul>
+        </div>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="profileView" class="view hidden">
+        <div class="card">
+          <div class="card-head">
+            <h2>Perfil</h2>
+            <button id="saveProfile" class="btn btn-primary">Salvar</button>
+          </div>
+          <div class="grid two">
+            <div>
+              <label>Nome completo <input type="text" id="pName"/></label>
+              <label>E-mail <input type="email" id="pEmail"/></label>
+              <label>Telefone <input type="tel" id="pPhone" placeholder="(xx) xxxxx-xxxx"/></label>
+              <label>Profissão / Cargo <input type="text" id="pRole"/></label>
+              <label>Segmento <input type="text" id="pSegment" placeholder="Design gráfico / Autônomo"/></label>
+            </div>
+            <div>
+              <label>Objetivos <textarea id="pGoals" rows="4"></textarea></label>
+              <label>Dores / Riscos <textarea id="pPains" rows="4"></textarea></label>
+              <label>Preferências de documento <input id="pPrefs" type="text" placeholder="orçamento, recibo, contrato..."/></label>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Modelos favoritos</h3>
+          <div id="favModels" class="tag-row"></div>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- MODAL: GERADOR (Tipo → Dados → Prévia) -->
+  <dialog id="generatorModal" class="modal">
+    <div class="generator">
+      <header class="modal-head">
+        <h3 id="genTitle">Novo documento</h3>
+        <div class="row gap">
+          <button id="printGen" class="btn">Imprimir</button>
+          <button id="exportGenDocx" class="btn">Exportar .docx</button>
+          <button id="exportGen" class="btn">Exportar .doc</button>
+          <button id="exportPdf" class="btn">Exportar .pdf</button>
+          <button id="saveGen" class="btn btn-primary">Salvar</button>
+          <button id="closeGen" class="btn">Fechar</button>
+        </div>
+      </header>
+
+      <div class="tabs tabs-line">
+        <button class="tab active" data-tab="tabTipo">Tipo</button>
+        <button class="tab" data-tab="tabDados">Dados</button>
+        <button class="tab" data-tab="tabPrevia">Prévia</button>
+      </div>
+
+      <div class="gen-body">
+        <!-- TIPO -->
+        <section id="tabTipo" class="tab-pane">
+          <div class="grid two">
+            <div>
+              <h4>Seções do documento</h4>
+              <div id="genChecklist" class="checklist"></div>
+            </div>
+            <div>
+              <h4>Documentos necessários</h4>
+              <ul id="requiredList" class="file-list"></ul>
+              <div class="source card" style="margin-top:8px">
+                <div class="small muted">Modelo (JSON online)</div>
+                <div id="genSource" class="source-url">—</div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <button class="btn" id="toDados">Continuar →</button>
+          </div>
+        </section>
+
+        <!-- DADOS -->
+        <section id="tabDados" class="tab-pane hidden">
+          <div class="grid two">
+            <label>Título
+              <input id="fldTitulo" type="text" placeholder="Ex.: Contrato João x Maria">
+            </label>
+            <label>Responsável
+              <input id="fldResponsavel" type="text" placeholder="Seu nome">
+            </label>
+          </div>
+
+          <label>Comando de texto (brief)
+            <textarea id="fldBrief" rows="3" placeholder='Ex.: "gerar contrato de locação residencial entre João da Silva e Maria Souza no valor de R$ 2.000 por 12 meses"' ></textarea>
+          </label>
+
+          <div class="grid two">
+            <label>Partes/Nomes
+              <input id="fldPartes" type="text" placeholder="João da Silva; Maria Souza">
+            </label>
+            <label>Data
+              <input id="fldData" type="date" placeholder="dd/mm/aaaa">
+            </label>
+          </div>
+
+          <label>Observações
+            <textarea id="fldObs" rows="4" placeholder="Notas/ajustes que devem aparecer no documento"></textarea>
+          </label>
+
+          <div class="card">
+            <h4 style="margin:0 0 8px">Anexos (opcional)</h4>
+            <div class="grid two">
+              <div>
+                <div class="muted small" style="margin-bottom:6px">Sugeridos para este tipo</div>
+                <ul id="suggestList" class="file-list"></ul>
+              </div>
+              <div>
+                <div class="muted small" style="margin-bottom:6px">Enviar arquivos</div>
+                <div id="dropArea" class="drop-area">
+                  <input id="fileInput" type="file" multiple hidden/>
+                  <p><strong>Arraste e solte</strong> aqui (ou <button type="button" id="browseBtn" class="link">procurar</button>)</p>
+                  <ul id="fileList" class="file-list"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:12px">
+            <button class="btn" id="backTipo">← Voltar</button>
+            <button class="btn btn-primary" id="toPrevia">Gerar prévia →</button>
+          </div>
+        </section>
+
+        <!-- PRÉVIA -->
+        <section id="tabPrevia" class="tab-pane hidden">
+          <iframe id="genPreview" title="Prévia do Documento"></iframe>
+          <div class="row" style="margin-top:12px">
+            <button class="btn" id="backDados">← Voltar</button>
+            <button class="btn btn-dark" id="regen">Atualizar prévia</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL: NOVO DOC RÁPIDO -->
+  <dialog id="newDocDialog" class="modal small">
+    <div class="pad">
+      <h3>Novo documento</h3>
+      <label>Tipo <select id="newDocType"></select></label>
+      <div class="row" style="margin-top:10px;">
+        <button id="newDocCancel" class="btn">Cancelar</button>
+        <button id="newDocConfirm" class="btn btn-primary">Continuar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
