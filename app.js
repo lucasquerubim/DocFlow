@@ -31,7 +31,7 @@ const TYPE_CONFIG = {
     ],
     sections:['capa','resumo','clausulas','condicoes','assinaturas'],
     required:['Briefing do cliente','Referências visuais','Dados de faturamento'],
-    image:'https://images.unsplash.com/photo-1508161777268-3899535b31a6?q=80&w=1200&auto=format&fit=crop'
+    image:'https://images.pexels.com/photos/326502/pexels-photo-326502.jpeg'
   },
   'Recibo': {
     desc:'Comprovante de pagamento.',
@@ -71,7 +71,7 @@ const TYPE_CONFIG = {
     ],
     sections:['capa','resumo','clausulas','anexos'],
     required:['Resumo executivo','Métricas principais','Projeções financeiras'],
-    image:'https://images.unsplash.com/photo-1529336953121-a0ce23d1fd1a?q=80&w=1200&auto=format&fit=crop'
+    image:'https://images.pexels.com/photos/3943714/pexels-photo-3943714.jpeg'
   },
   'Relatório Mensal da Agência': {
     desc:'Metas e resultados (BB).',
