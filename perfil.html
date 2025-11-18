@@ -1,0 +1,98 @@
+ <!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Editar Perfil — Docflow</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button onclick="window.location.href='home.html'" class="btn">← Voltar ao painel</button>
+
+    <div class="user-pill">
+      <img class="avatar xs" src="LucasAlmeida.png" alt="Avatar topo"/>
+      <div>
+        <strong>Lucas Almeida</strong>
+        <div class="muted small">lucas.almeida@docflow.app</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- div foto de perfil -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Editar Perfil</h2>
+        <button id="saveProfile" class="btn btn-primary">Salvar alterações</button>
+      </div>
+
+      <div class="grid two">
+
+        <!-- foto de perfil -->
+        <div>
+          <h3>Foto de perfil</h3>
+          <img id="profilePhoto" src="LucasAlmeida.png" alt="Foto de perfil" class="avatar xxl"/>
+
+          <div class="row gap" style="margin-top:12px;">
+            <input type="file" id="photoInput" accept="image/*" hidden/>
+            <button id="changePhotoBtn" class="btn">Alterar foto</button>
+            <button id="removePhotoBtn" class="btn btn-ghost danger">Remover</button>
+          </div>
+        </div>
+
+        <!-- campos para serem alterados  -->
+        <div>
+          <h3>Informações pessoais</h3>
+
+          <label>Nome completo
+            <input type="text" id="editName" value="Lucas Almeida"/>
+          </label>
+
+          <label>E-mail
+            <input type="email" id="editEmail" value="lucas.almeida@docflow.app"/>
+          </label>
+
+          <label>Telefone
+            <input type="tel" id="editPhone" placeholder="(xx) xxxxx-xxxx" value="(11) 98765-4321"/>
+          </label>
+
+          <label>Profissão / Cargo
+            <input type="text" id="editRole" value="Designer gráfico autônomo"/>
+          </label>
+
+          <label>Nova senha
+            <input type="password" id="editPassword" placeholder="Deixe em branco para manter atual"/>
+          </label>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="card">
+
+      <h3>Preferências</h3>
+
+      <label>Segmento
+        <input type="text" id="editSegment" placeholder="Ex.: Design gráfico / Autônomo" value="Design gráfico / Autônomo"/>
+      </label>
+
+      <label>Tipos de documentos favoritos
+        <input type="text" id="editPrefs" placeholder="orçamento, recibo, contrato..." value="contrato, orçamento"/>
+      </label>
+
+      <label>Descrição pessoal
+        <textarea id="editBio" rows="4"
+          placeholder="Fale um pouco sobre você...">Designer e freelancer especializado em identidade visual e criação de materiais digitais.</textarea>
+      </label>
+
+    </section>
+
+  </main>
+
+
+</body>
+</html>

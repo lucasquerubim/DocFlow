@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | DocFlow</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-box">
+      <img src="logo.png" alt="Logo DocFlow" class="login-logo">
+
+      <h2>Bem-vindo de volta!</h2>
+      <p class="subtitle">Entre com sua conta para continuar</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="Digite sua senha" required>
+        </div>
+
+        <div class="extra-links">
+          <a href="#" id="forgotPassword">Esqueceu sua senha?</a>
+          <br>
+          
+        </div>
+
+        <button type="submit" class="btn-form">Entrar</button>
+      <span class="subtitle">Não possui conta? </span><a href="cadastro.html">Cadastre-se</a>
+      </form>
+
+      <p class="footer">© 2025 DocFlow — Todos os direitos reservados</p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

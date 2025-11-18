@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DocFlow - Modelos de Documentos</title>
+  
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="logo">DocFlow</h1>
+    <nav class="nav-actions">
+      <button class="new-doc" id="btnNovoDoc">+ Novo Documento</button>
+      <img src="LucasAlmeida.png" alt="Perfil" class="perfil">
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="section-header">
+        <h2>Modelos disponíveis</h2>
+        <button class="see-more">Ver mais →</button>
+      </div>
+      <div class="cards-grid" id="modelos">
+        <div class="card"><img src="img/Gemini_Generated_Image_yisz7tyisz7tyisz.png" alt="Modelo de Proposta"><p>Proposta Comercial</p></div>
+        <div class="card"><img src="img/Gemini_Generated_Image_tkt6u5tkt6u5tkt6.png" alt=""><p>Relatório de Atividades</p></div>
+        <div class="card"><img src="img/Gemini_Generated_Image_3axcux3axcux3axc.png" alt=""><p>Carta Formal</p></div>
+        <div class="card"><img src="img/Gemini_Generated_Image_3axcux3axcux3axc.png" alt=""><p>Contrato Simples</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Usados recentemente</h2>
+        <button class="see-more">Ver mais →</button>
+      </div>
+      <div class="cards-grid" id="recentes">
+        <div class="card"><img src="img/Gemini_Generated_Image_1jlf8l1jlf8l1jlf.png" alt=""><p>Proposta Comercial - 05/11</p></div>
+        <div class="card"><img src="img/Gemini_Generated_Image_m1mor2m1mor2m1mo.png" alt=""><p>Relatório de Evidências - 03/11</p></div>
+        <div class="card"><img src="img/Gemini_Generated_Image_1jlf8l1jlf8l1jlf.png " alt=""><p>Carta de Apresentação - 01/11</p></div>
+      </div>
+    </section>
+  </main>
+
+  
+  <div class="modal" id="modalNovoDoc" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+      <h3 id="modalTitle">Criar novo documento</h3>
+      <p>Escolha como deseja começar:</p>
+      <div class="modal-buttons">
+        <button class="modal-option" id="brancoBtn">Documento em branco</button>
+        <button class="modal-option" id="modeloBtn">A partir de um modelo</button>
+      </div>
+      <button class="close-modal" id="fecharModal">Fechar</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>DockFlow © 2025</p>
+  </footer>
+
+  
+  <script src="home.js"></script>
+</body>
+</html>
