@@ -1,0 +1,100 @@
+/* Estilos Gerais e Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #7c3aed, #5746ea);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container do Formulário */
+.form-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px 32px;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+    width: 100%;
+    max-width: 420px;
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Grupos de Input (Label + Input) */
+.input-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff; /* Destaque azul ao focar */
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+/* Link para trocar de formulário */
+.switch-form {
+    text-align: center;
+    margin-top: 1rem;
+    color: #555;
+}
+
+.switch-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+#cadastro {
+    /* Aparência de Botão */
+    display: inline-block; /* Permite definir padding e largura, mas mantém inline */
+    padding: 0.75rem 1.5rem; /* Preenchimento interno para dar volume */
+    border: none;
+    border-radius: 5px;
+    
+    /* Cores e Tipografia */
+    background-color: #28a745; /* Cor verde para Cadastro (comum para 'Novo') */
+    color: white; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    
+    /* Interação */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s ease; /* Transição suave para o hover */
+}
+
+#cadastro:hover {
+    background-color: #218838; /* Cor um pouco mais escura ao passar o mouse */
+    text-decoration: none;
+}
