@@ -1,66 +1,213 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DocFlow - Modelos de Documentos</title>
-  
-  <link rel="stylesheet" href="home.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DocFlow — Plataforma Inteligente de Automação de Documentos</title>
+  <meta name="description" content="Gere, revise e exporte documentos padronizados com IA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css" />
 </head>
 <body>
-  <header class="topbar">
-    <h1 class="logo">DocFlow</h1>
-    <nav class="nav-actions">
-      <button class="new-doc" id="btnNovoDoc">+ Novo Documento</button>
-      <img src="LucasAlmeida.png" alt="Perfil" class="perfil">
-    </nav>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Topbar -->
+  <header class="topbar" role="banner">
+    <div class="brand">
+      <img src="logo.png" width="36" height="36" alt="Logo DocFlow" />
+      <strong class="brand__name">DocFlow</strong>
+    </div>
+    <div class="topbar__actions">
+      <!--button class="btn btn-ghost" id="toggleTheme" aria-pressed="false" title="Alternar tema claro/escuro">🌓
+        <span class="sr-only">Alternar tema</span>
+      </button-->
+      <div class="search">
+        <input id="q" type="search" class="input" placeholder="Buscar documentos, tipos, pessoas…" aria-label="Buscar">
+        <button id="buscar" class="btn btn-outline">Buscar</button>
+      </div>
+      <a id="userlink" href="perfil.html">
+      <div class="user">
+        <img src="LucasAlmeida.png" alt="" class="avatar" width="36" height="36" />
+        <div class="user__meta">
+          <span class="user__name">Lucas Almeida</span>
+          <span class="user__role">lucas.almeida@docflow.app</span>
+        </div>
+      </div></a>
+    </div>
   </header>
 
-  <main class="container">
-    <section class="section">
-      <div class="section-header">
-        <h2>Modelos disponíveis</h2>
-        <button class="see-more">Ver mais →</button>
-      </div>
-      <div class="cards-grid" id="modelos">
-        <div class="card"><img src="img/Gemini_Generated_Image_yisz7tyisz7tyisz.png" alt="Modelo de Proposta"><p>Proposta Comercial</p></div>
-        <div class="card"><img src="img/Gemini_Generated_Image_tkt6u5tkt6u5tkt6.png" alt=""><p>Relatório de Atividades</p></div>
-        <div class="card"><img src="img/Gemini_Generated_Image_3axcux3axcux3axc.png" alt=""><p>Carta Formal</p></div>
-        <div class="card"><img src="img/Gemini_Generated_Image_3axcux3axcux3axc.png" alt=""><p>Contrato Simples</p></div>
-      </div>
-    </section>
+  <div class="shell">
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Menu principal">
+      <nav>
+        <button class="nav-item is-active" data-view="dashboardView" title="Visão geral">
+          <span aria-hidden="true">🏠</span><span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="documentsView" title="Seus documentos">
+          <span aria-hidden="true">📄</span><span>Documentos</span>
+        </button>
+        <a href="perfil.html" style="color:#fff; text-decoration: none;">
+        <button class="nav-item" data-view="profileView" title="Perfil e preferências">
+          <span aria-hidden="true">👤</span><span>Perfil</span>
+        </button></a>
+        <button class="nav-item" data-view="notificationsView" title="Notificações">
+          <span aria-hidden="true">🔔</span><span>Notificações</span>
+        </button>
+        <a href="index.html" style="color:#fff; text-decoration: none;">
+        <div class="sidebar__footer">
+          <button class="nav-item nav-item--danger" id="sairBtn" title="Encerrar sessão">
+            <span aria-hidden="true">⎋</span><span>Sair</span>
+          </button></a>
+        </div>
+      </nav>
+    </aside>
 
-    <section class="section">
-      <div class="section-header">
-        <h2>Usados recentemente</h2>
-        <button class="see-more">Ver mais →</button>
-      </div>
-      <div class="cards-grid" id="recentes">
-        <div class="card"><img src="img/Gemini_Generated_Image_1jlf8l1jlf8l1jlf.png" alt=""><p>Proposta Comercial - 05/11</p></div>
-        <div class="card"><img src="img/Gemini_Generated_Image_m1mor2m1mor2m1mo.png" alt=""><p>Relatório de Evidências - 03/11</p></div>
-        <div class="card"><img src="img/Gemini_Generated_Image_1jlf8l1jlf8l1jlf.png " alt=""><p>Carta de Apresentação - 01/11</p></div>
-      </div>
-    </section>
-  </main>
+    <!-- Main -->
+    <main id="conteudo" class="main">
+      <!-- DASHBOARD -->
+      <section id="dashboardView" class="view" aria-labelledby="h-dashboard">
+        <div class="view__header">
+          <div>
+            <h1 id="h-dashboard">Bem-vindo ao DocFlow</h1>
+            <p class="muted">Seu assistente inteligente para documentos profissionais — gere, revise e exporte com IA.</p>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" id="novoDocBtn">+ Criar documento</button>
+            <a class="btn btn-outline" href="#" id="govbr">Assinar no Gov.br</a>
+          </div>
+        </div>
 
-  
-  <div class="modal" id="modalNovoDoc" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
-      <h3 id="modalTitle">Criar novo documento</h3>
-      <p>Escolha como deseja começar:</p>
-      <div class="modal-buttons">
-        <button class="modal-option" id="brancoBtn">Documento em branco</button>
-        <button class="modal-option" id="modeloBtn">A partir de um modelo</button>
+        <!-- Status -->
+        <div class="grid grid--stats" role="region" aria-label="Indicadores de status">
+          <article class="stat stat--draft" aria-live="polite">
+            <header>Rascunhos</header>
+            <strong class="stat__value" id="statDrafts">1</strong>
+            <span class="stat__delta positive">+2 hoje</span>
+          </article>
+          <article class="stat stat--done" aria-live="polite">
+            <header>Prontos</header>
+            <strong class="stat__value" id="statReady">1</strong>
+          </article>
+          <article class="stat stat--pending" aria-live="polite">
+            <header>Pendentes de assinatura</header>
+            <strong class="stat__value" id="statPending">1</strong>
+            <span class="attention">atenção</span>
+          </article>
+        </div>
+
+        <h2 class="section-title">Gerar documentos</h2>
+        <p class="muted small">Automatize contratos, relatórios e propostas com um clique.</p>
+
+        <div class="grid grid--cards" id="cardsGrid"></div>
+      </section>
+
+      <!-- DOCUMENTOS -->
+      <section id="documentsView" class="view hidden" aria-labelledby="h-docs">
+        <div class="view__header">
+          <h1 id="h-docs">Documentos</h1>
+          <div class="actions">
+            <button class="btn btn-primary" id="novoDocBtn2">+ Novo</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel__header">
+            <input id="buscaDocs" class="input" type="search" placeholder="Buscar documentos, tipos, pessoas…" aria-label="Buscar documentos" />
+          </div>
+          <div id="listaDocs" class="list"></div>
+        </div>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="profileView" class="view hidden" aria-labelledby="h-perfil">
+        <div class="view__header">
+          <h1 id="h-perfil">Perfil</h1>
+        </div>
+        <div class="panel">
+          <form class="form">
+            <label class="field">
+              <span>Nome</span>
+              <input class="input" value="Lucas Almeida" aria-label="Nome do usuário"/>
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input class="input" value="lucas.almeida@docflow.app" type="email" aria-label="Email do usuário"/>
+            </label>
+            <label class="switch">
+              <input type="checkbox" id="altoContraste" />
+              <span>Ativar alto contraste</span>
+            </label>
+            <button class="btn btn-primary" type="button" id="salvarPerfil">Salvar preferências</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- NOTIFICAÇÕES -->
+      <section id="notificationsView" class="view hidden" aria-labelledby="h-notif">
+        <div class="view__header">
+          <h1 id="h-notif">Notificações</h1>
+        </div>
+        <ul class="timeline" id="timeline"></ul>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="h-modal">
+    <div class="modal__card" role="document">
+      <div class="modal__header">
+        <h2 id="h-modal">Novo documento</h2>
+        <button class="btn btn-ghost" id="fecharModal" aria-label="Fechar">✕</button>
       </div>
-      <button class="close-modal" id="fecharModal">Fechar</button>
+
+      <div class="modal__body">
+        <form id="formNovoDoc" class="form">
+          <label class="field">
+            <span>Título</span>
+            <input class="input" name="titulo" placeholder="Ex.: Contrato de Prestação de Serviços" required />
+          </label>
+
+          <div class="grid grid--two">
+            <label class="field">
+              <span>Categoria</span>
+              <select class="input" name="categoria">
+                <option>Contratos</option>
+                <option>Relatórios</option>
+                <option>Certificados</option>
+                <option>Propostas</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Tom de linguagem</span>
+              <select class="input" name="tom">
+                <option>Formal</option>
+                <option>Neutro</option>
+                <option>Objetivo</option>
+              </select>
+            </label>
+          </div>
+
+          <fieldset class="checks">
+            <legend>Seções do documento</legend>
+            <label><input type="checkbox" name="secao" value="Capa" checked> Capa</label>
+            <label><input type="checkbox" name="secao" value="Cláusulas" checked> Cláusulas / Corpo</label>
+            <label><input type="checkbox" name="secao" value="Assinaturas" checked> Assinaturas</label>
+            <label><input type="checkbox" name="secao" value="Anexos"> Anexos</label>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn" id="previewBtn">Prévia</button>
+        <button class="btn btn-primary" id="gerarBtn">Gerar com IA</button>
+      </div>
     </div>
   </div>
 
-  <footer class="footer">
-    <p>DockFlow © 2025</p>
-  </footer>
+  <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-  
-  <script src="home.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
