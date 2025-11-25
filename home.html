@@ -154,60 +154,110 @@
     </main>
   </div>
 
-  <!-- Modal -->
-  <div class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="h-modal">
-    <div class="modal__card" role="document">
-      <div class="modal__header">
-        <h2 id="h-modal">Novo documento</h2>
-        <button class="btn btn-ghost" id="fecharModal" aria-label="Fechar">✕</button>
-      </div>
+<!-- Modal Gerador -->
+<div class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="h-modal">
+  <div class="modal__card" role="document">
+    <div class="modal__header">
+      <h2 id="h-modal">Gerar Documento</h2>
+      <button class="btn btn-ghost" id="fecharModal" aria-label="Fechar">✕</button>
+    </div>
 
-      <div class="modal__body">
-        <form id="formNovoDoc" class="form">
+    <div class="modal__body">
+      <form id="formNovoDoc" class="form">
+        <div class="grid grid--two">
           <label class="field">
-            <span>Título</span>
+            <span>Título do Documento</span>
             <input class="input" name="titulo" placeholder="Ex.: Contrato de Prestação de Serviços" required />
           </label>
+          <label class="field">
+            <span>Categoria</span>
+            <select class="input" name="categoria">
+              <option>Contrato</option>
+              <option>Declaração</option>
+              <option>Relatório</option>
+              <option>Procuração</option>
+              <option>Ofício</option>
+            </select>
+          </label>
+        </div>
 
-          <div class="grid grid--two">
-            <label class="field">
-              <span>Categoria</span>
-              <select class="input" name="categoria">
-                <option>Contratos</option>
-                <option>Relatórios</option>
-                <option>Certificados</option>
-                <option>Propostas</option>
-              </select>
+        <div class="field">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <span style="font-weight: 600; color: var(--ink);">Dados do Documento</span>
+            <button type="button" class="btn btn-outline" id="adicionarCampo" style="font-size: 13px; padding: 6px 12px;">+ Adicionar Campo</button>
+          </div>
+          
+          <div class="dados-container">
+            <div class="dado-item">
+              <div class="dado-campos">
+                <input type="text" class="input" placeholder="Nome do campo (ex: Nome Cliente)">
+                <select class="input">
+                  <option>Texto</option>
+                  <option>Número</option>
+                  <option>Data</option>
+                  <option>CPF/CNPJ</option>
+                  <option>E-mail</option>
+                  <option>Telefone</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-ghost btn-remove" style="color: var(--danger);">🗑️</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid--two">
+          <label class="field">
+            <span>Formato de Saída</span>
+            <select class="input" name="formato">
+              <option>PDF</option>
+              <option>Word</option>
+              <option>HTML</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Tom de Linguagem</span>
+            <select class="input" name="tom">
+              <option>Formal</option>
+              <option>Neutro</option>
+              <option>Informal</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="opcoes-container">
+          <span style="font-weight: 600; color: var(--ink); margin-bottom: 12px; display: block;">Opções do Documento</span>
+          <div class="opcoes-grid">
+            <label class="opcao-item">
+              <input type="checkbox" name="assinatura" checked>
+              <span>Incluir campo de assinatura</span>
             </label>
-            <label class="field">
-              <span>Tom de linguagem</span>
-              <select class="input" name="tom">
-                <option>Formal</option>
-                <option>Neutro</option>
-                <option>Objetivo</option>
-              </select>
+            <label class="opcao-item">
+              <input type="checkbox" name="carimbo">
+              <span>Carimbo de data/hora</span>
+            </label>
+            <label class="opcao-item">
+              <input type="checkbox" name="numeracao" checked>
+              <span>Numeração automática</span>
+            </label>
+            <label class="opcao-item">
+              <input type="checkbox" name="marcadagua">
+              <span>Marca d'água "Rascunho"</span>
             </label>
           </div>
+        </div>
+      </form>
+    </div>
 
-          <fieldset class="checks">
-            <legend>Seções do documento</legend>
-            <label><input type="checkbox" name="secao" value="Capa" checked> Capa</label>
-            <label><input type="checkbox" name="secao" value="Cláusulas" checked> Cláusulas / Corpo</label>
-            <label><input type="checkbox" name="secao" value="Assinaturas" checked> Assinaturas</label>
-            <label><input type="checkbox" name="secao" value="Anexos"> Anexos</label>
-          </fieldset>
-        </form>
-      </div>
-
-      <div class="modal__footer">
-        <button class="btn" id="previewBtn">Prévia</button>
-        <button class="btn btn-primary" id="gerarBtn">Gerar com IA</button>
-      </div>
+    <div class="modal__footer">
+      <button class="btn" id="previewBtn">Visualizar Prévia</button>
+      <button class="btn btn-primary" id="gerarBtn">Gerar Documento</button>
     </div>
   </div>
+</div>
 
   <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
 </html>

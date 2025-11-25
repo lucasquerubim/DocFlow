@@ -3,7 +3,6 @@
    - Navegação entre views
    - Renderização de cards
    - Modal novo documento
-   - Toasts e tema
 */
 
 const $ = (sel, ctx=document) => ctx.querySelector(sel);
@@ -67,6 +66,7 @@ $("#gerarBtn").addEventListener("click", (e) => {
   e.preventDefault();
   const data = new FormData($("#formNovoDoc"));
   const titulo = data.get("titulo") || "Documento";
+  gerarPDF()
   toast(`✅ "${titulo}" gerado com sucesso!`);
   closeModal();
 });
@@ -86,14 +86,6 @@ function toast(msg){
   setTimeout(() => el.remove(), 3500);
 }
 
-// Tema
-const toggleTheme = $("#toggleTheme");
-toggleTheme.addEventListener("click", () => {
-  const dark = document.body.classList.toggle("dark");
-  toggleTheme.setAttribute("aria-pressed", String(dark));
-  toast(dark ? "🌙 Tema escuro ativado" : "☀️ Tema claro ativado");
-});
-
 // Acessibilidade: alto contraste
 $("#altoContraste").addEventListener("change", (e) => {
   document.body.style.filter = e.target.checked ? "contrast(1.1) saturate(1.05)" : "none";
@@ -107,8 +99,54 @@ $("#buscar").addEventListener("click", () => {
   toast(`Resultados para "${q}" (mock)`);
 });
 
-$("#sairbtn").addEventListener("click", () => {
-  const q = $("#q").value.trim().toLowerCase();
-  if(!q){ toast("Digite um termo para buscar."); return; }
-  toast(`Resultados para "${q}" (mock)`);
-});
+//$("#sairbtn").addEventListener("click", () => {
+  //const q = $("#q").value.trim().toLowerCase();
+  //if(!q){ toast("Digite um termo para buscar."); return; }
+  //toast(`Resultados para "${q}" (mock)`);
+//});
+
+function gerarPDF() {
+    const titulo = $('input[name="titulo"]').value || 'Documento Sem Título';
+    const categoria = $('select[name="categoria"]').value;
+    //const formato = $('select[name="formato"]').value;
+    const tom = $('select[name="tom"]').value;
+    
+    const campos = [];
+    $$('.dado-item').forEach(item => {
+        const nomeCampo = item.querySelector('input[type="text"]').value;
+        const tipoCampo = item.querySelector('select').value;
+        if (nomeCampo) {
+            campos.push({ nome: nomeCampo, tipo: tipoCampo });
+        }
+    });
+    const doc = new jsPDF();
+    let yPos = 20;
+    const margin = 20;
+    const pageWidth = doc.internal.pageSize.width;
+    
+    // cabeçalho
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text(titulo, margin, yPos);
+    yPos += 10;
+    
+    // informações
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.text(`Categoria: ${categoria}`, margin, yPos);
+    doc.text(`Tom de Linguagem: ${tom}`, pageWidth - margin, yPos, { align: 'right' });
+    yPos += 15;
+    
+    // conteúdo principal - campos do documento
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'bold');
+    doc.text('DADOS DO DOCUMENTO:', margin, yPos);
+    yPos += 10;
+    
+    // salvar o PDF
+    const fileName = titulo.toLowerCase().replace(/[^a-z0-9]/g, '_') + '.pdf';
+    doc.save(fileName);
+
+    toast(`✅ PDF "${titulo}" gerado com sucesso!`);
+    closeModal();
+}
