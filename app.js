@@ -108,42 +108,105 @@ $("#buscar").addEventListener("click", () => {
 function gerarPDF() {
     const titulo = $('input[name="titulo"]').value || 'Documento Sem Título';
     const categoria = $('select[name="categoria"]').value;
-    //const formato = $('select[name="formato"]').value;
     const tom = $('select[name="tom"]').value;
     
     const campos = [];
     $$('.dado-item').forEach(item => {
         const nomeCampo = item.querySelector('input[type="text"]').value;
         const tipoCampo = item.querySelector('select').value;
-        if (nomeCampo) {
+        if (nomeCampo && nomeCampo.trim() !== '') {
             campos.push({ nome: nomeCampo, tipo: tipoCampo });
         }
     });
+    
     const doc = new jsPDF();
     let yPos = 20;
     const margin = 20;
     const pageWidth = doc.internal.pageSize.width;
+    const contentWidth = pageWidth - (margin * 2);
     
-    // cabeçalho
+    // CABEÇALHO - Com quebra automática para título longo
     doc.setFontSize(16);
     doc.setFont(undefined, 'bold');
-    doc.text(titulo, margin, yPos);
-    yPos += 10;
     
-    // informações
+    // Usar splitTextToSize para quebrar o título se for muito longo
+    const tituloLinhas = doc.splitTextToSize(titulo, contentWidth);
+    doc.text(tituloLinhas, margin, yPos);
+    yPos += (tituloLinhas.length * 6); // Aproximadamente 6 unidades por linha
+    
+    // INFORMAÇÕES
     doc.setFontSize(10);
     doc.setFont(undefined, 'normal');
     doc.text(`Categoria: ${categoria}`, margin, yPos);
     doc.text(`Tom de Linguagem: ${tom}`, pageWidth - margin, yPos, { align: 'right' });
     yPos += 15;
     
-    // conteúdo principal - campos do documento
+    // Linha separadora
+    doc.setDrawColor(200, 200, 200);
+    doc.line(margin, yPos, pageWidth - margin, yPos);
+    yPos += 15;
+    
+    // CONTEÚDO PRINCIPAL
     doc.setFontSize(12);
     doc.setFont(undefined, 'bold');
-    doc.text('DADOS DO DOCUMENTO:', margin, yPos);
-    yPos += 10;
+    const tituloCampos = doc.splitTextToSize('DADOS DO DOCUMENTO:', contentWidth);
+    doc.text(tituloCampos, margin, yPos);
+    yPos += (tituloCampos.length * 6) + 5;
     
-    // salvar o PDF
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    
+    if (campos.length > 0) {
+        campos.forEach((campo, index) => {
+            // Verificar se precisa de nova página
+            if (yPos > 250) {
+                doc.addPage();
+                yPos = 20;
+            }
+            
+            const label = `${campo.nome}:`;
+            const value = `[${campo.tipo.toUpperCase()}]`;
+            
+            // Quebrar label se for muito longo
+            const labelLinhas = doc.splitTextToSize(label, contentWidth - 70);
+            const valueLinhas = doc.splitTextToSize(value, 60);
+            
+            // Desenhar label
+            doc.setFont(undefined, 'bold');
+            doc.text(labelLinhas, margin, yPos);
+            
+            // Desenhar valor alinhado à direita
+            doc.setFont(undefined, 'normal');
+            const valueY = yPos;
+            doc.text(valueLinhas, pageWidth - margin - 60, valueY, { align: 'right' });
+            
+            // Ajustar Y para próxima linha baseado na maior quantidade de linhas
+            const maxLinhas = Math.max(labelLinhas.length, valueLinhas.length);
+            yPos += (maxLinhas * 6) + 4;
+            
+            // Linha para preenchimento (apenas se não for a última)
+            if (index < campos.length - 1) {
+                doc.setDrawColor(220, 220, 220);
+                doc.line(margin, yPos, pageWidth - margin, yPos);
+                yPos += 8;
+            }
+        });
+    } else {
+        doc.text('Nenhum campo definido', margin, yPos);
+        yPos += 10;
+    }
+    
+    // Adicionar data/hora no rodapé
+    yPos += 10;
+    const agora = new Date();
+    const dataFormatada = agora.toLocaleDateString('pt-BR');
+    const horaFormatada = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Gerado por DocFlow em ${dataFormatada} às ${horaFormatada}`, pageWidth / 2, pageWidth - 10, { align: 'center' });
+    
+    // SALVAR O PDF
     const fileName = titulo.toLowerCase().replace(/[^a-z0-9]/g, '_') + '.pdf';
     doc.save(fileName);
 

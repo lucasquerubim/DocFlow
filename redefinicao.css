@@ -1,0 +1,134 @@
+/* Estilos Gerais e Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #7c3aed, #5746ea);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container do Formulário */
+.reset-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px 32px;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+    width: 100%;
+    max-width: 420px;
+}
+
+.reset-container h1 {
+    color: #1e1e2f;
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+/* CAMPOS */
+.reset-container p {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+}
+
+/* BOTÕES */
+button {
+    background: linear-gradient(90deg, #7c3aed, #5746ea);
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.voltar {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.voltar:hover {
+    background: #e5e7eb;
+    opacity: 1;
+}
+
+/* LINKS */
+.link-voltar {
+    display: block;
+    margin-top: 20px;
+    color: #7c3aed;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.link-voltar:hover {
+    color: #5746ea;
+    text-decoration: underline;
+}
+
+/* ETAPAS */
+.hidden {
+    display: none;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 480px) {
+    .reset-container {
+        padding: 32px 22px;
+        margin: 20px;
+    }
+}
