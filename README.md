@@ -22,7 +22,4 @@ Basta abrir o `index.html` no navegador.
 
 > **Dica:** habilite popups para baixar `.docx`/`.pdf` sem bloqueios.
 
----
-
-## 🗂️ Estrutura
 
