@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Senha — DocFlow</title>
+  <link rel="stylesheet" href="redefinicao.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="reset-container">
+
+  <!-- Logo (opcional, seguindo o padrão do login) -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    <div style="font-size: 28px; font-weight: 800; color: #7c3aed; margin-bottom: 8px;">DocFlow</div>
+    <p class="subtitle">Plataforma de automação de documentos</p>
+  </div>
+
+  <h1>Redefinir Senha</h1>
+  
+  <!-- ETAPA 1 -->
+  <div id="step1">
+    <p>Digite seu e-mail cadastrado:</p>
+    <input id="emailReset" type="email" placeholder="seuemail@exemplo.com">
+    <button onclick="enviarCodigo()">Enviar código</button>
+  </div>
+
+  <!-- ETAPA 2 -->
+  <div id="step2" class="hidden">
+    <p>Digite o código enviado por e-mail:</p>
+    <input id="codigoReset" type="text" placeholder="123456" maxlength="6">
+    <button onclick="validarCodigo()">Confirmar código</button>
+    <button class="voltar" onclick="voltar(1)">Voltar</button>
+  </div>
+
+  <!-- ETAPA 3 -->
+  <div id="step3" class="hidden">
+    <p>Crie sua nova senha:</p>
+    <input id="novaSenha" type="password" placeholder="Nova senha">
+    <input id="novaSenha2" type="password" placeholder="Confirmar senha">
+
+    <div style="font-size: 12px; color: #6b7280; text-align: left; margin-bottom: 16px;">
+      <p>• Mínimo de 8 caracteres</p>
+      <p>• Pelo menos uma letra maiúscula</p>
+      <p>• Pelo menos um número</p>
+    </div>
+
+    <button onclick="salvarSenha()">Salvar nova senha</button>
+    <button class="voltar" onclick="voltar(2)">Voltar</button>
+  </div>
+
+  <a href="login.html" class="link-voltar">← Voltar para o login</a>
+
+</div>
+
+<script src="redefinicao.js"></script>
+</body>
+</html>
