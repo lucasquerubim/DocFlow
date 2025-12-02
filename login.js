@@ -26,11 +26,3 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
   }
 });
 
-// Clique em "Esqueceu sua senha?"
-document.getElementById('forgotPassword').addEventListener('click', (e) => {
-  e.preventDefault();
-  const email = prompt("Digite seu e-mail para redefinir a senha:");
-  if (email) {
-    alert(`Um link de redefinição foi enviado para ${email}.`);
-  }
-});
